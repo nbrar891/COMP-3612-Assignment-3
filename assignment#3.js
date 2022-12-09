@@ -15,7 +15,7 @@ let artists = null
 let galleries = null
 let paintings = null
  
-// gets all data from json files and parses them
+
 fs.readFile(jsonPath1,(err,data, response)=>{
 
     if(err)
@@ -91,7 +91,7 @@ app.get("/api/painting/:id", (req,resp) =>
     else
     {
 
-        resp.json({message: "A painting was not found using this ID"})
+        resp.json({message: "No painting was found using this ID"})
 
     }
 })
@@ -106,7 +106,7 @@ app.get("/api/painting/gallery/:id", (req,resp)=>
     }
     else
     {
-        resp.json({message: "A gallery was not found using this ID"})
+        resp.json({message: "No paintings were found using this gallery ID"})
     }
 
 })
@@ -121,7 +121,7 @@ app.get("/api/painting/artist/:id", (req,resp)=>
     }
     else
     {
-        resp.json({message: "A artist was not found using this ID"})
+        resp.json({message: "No paintings were found with this artist ID"})
     }
 
 })
@@ -136,7 +136,7 @@ app.get("/api/painting/year/:min/:max", (req,resp) =>
     }
     else
     {
-        resp.json({message: "A year was not found between this min and max"})
+        resp.json({message: "No paintings were found with this min and max"})
     }
 
 })
@@ -144,7 +144,6 @@ app.get("/api/painting/year/:min/:max", (req,resp) =>
 // this returns the JSON containing the paintings with the provided text as a part of their title
 app.get("/api/painting/title/:text", (req,resp) =>
 {
-  // handles case insensitive
     const results = paintings.filter(p => p.title.toUpperCase().includes(req.params.text)||p.title.toLowerCase().includes(req.params.text) || p.title.includes(req.params.text))
     if(results.length > 0) //checks if the title is found, if not it returns a message
     {
@@ -152,7 +151,7 @@ app.get("/api/painting/title/:text", (req,resp) =>
     }
     else
     {
-        resp.json({message: "A title was not found with the provided title name"})
+        resp.json({message: "No paintings were found with this as a part or as the title name"})
     }
 
 })
@@ -160,7 +159,6 @@ app.get("/api/painting/title/:text", (req,resp) =>
 // This returns the JSON containing the paintings that have a color matched with the provided value
 app.get("/api/painting/color/:name", (req,resp) =>
 {
- // handles case insensitive
     const results = paintings.filter(p => p.details.annotation.dominantColors.some(p => p.name.toUpperCase() == req.params.name ||p.name.toLowerCase() == req.params.name ||p.name == req.params.name))
     if(results.length > 0) //checks if the color name is found, if not it returns a message
     {
@@ -168,7 +166,7 @@ app.get("/api/painting/color/:name", (req,resp) =>
     }
     else
     {
-        resp.json({message: "A color with this name was not found"})
+        resp.json({message: "No paintings were found with this color"})
     }
 
 })
@@ -176,7 +174,6 @@ app.get("/api/painting/color/:name", (req,resp) =>
 // This returns the JSON containing the artists from the country provided
 app.get("/api/artists/:country", (req,resp) =>
 {
- // handles case insensitive
     const results = artists.filter(p => p.Nationality.toLowerCase() == req.params.country ||p.Nationality.toUpperCase() == req.params.country ||p.Nationality == req.params.country  )
     if(results.length > 0) //checks if the artist from this country is found, if not it returns a message
     {
@@ -184,15 +181,12 @@ app.get("/api/artists/:country", (req,resp) =>
     }
     else
     {
-        resp.json({message: "A artist from this country was not found"})
+        resp.json({message: "Artists from this country were not found"})
     }
-
-    
 })
 // this returns the JSON containing the galleries from the country provided
 app.get("/api/galleries/:country", (req,resp) => 
 {
- // handles case insensitive
     const results = galleries.filter(p => p.GalleryCountry.toLowerCase() == req.params.country ||p.GalleryCountry.toUpperCase() == req.params.country || p.GalleryCountry == req.params.country)
     if(results.length > 0) //checks if a gallery from this country is found, if not it returns a message
     {
@@ -200,7 +194,7 @@ app.get("/api/galleries/:country", (req,resp) =>
     }
     else
     {
-        resp.json({message: "A gallery from this country was not found"})
+        resp.json({message: "Galleries from this country were not found"})
     }
 
 })
