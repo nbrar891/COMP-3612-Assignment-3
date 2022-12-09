@@ -144,7 +144,7 @@ app.get("/api/painting/year/:min/:max", (req,resp) =>
 // this returns the JSON containing the paintings with the provided text as a part of their title
 app.get("/api/painting/title/:text", (req,resp) =>
 {
-    const results = paintings.filter(p => p.title.toUpperCase() == req.params.text ||p.title.toLowerCase() == req.params.text || p.title == req.params.text)
+    const results = paintings.filter(p => p.title.toUpperCase().includes(req.params.text)||p.title.toLowerCase().includes(req.params.text) || p.title.includes(req.params.text))
     if(results.length > 0) //checks if the title is found, if not it returns a message
     {
         resp.json(results)
