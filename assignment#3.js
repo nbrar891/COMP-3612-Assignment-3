@@ -144,7 +144,7 @@ app.get("/api/painting/year/:min/:max", (req,resp) =>
 // this returns the JSON containing the paintings with the provided text as a part of their title
 app.get("/api/painting/title/:text", (req,resp) =>
 {
-    const results = paintings.filter(p => p.title.toUpperCase() == req.params.text ||p.title.toLowerCase() == req.params.text)
+    const results = paintings.filter(p => p.title.toUpperCase() == req.params.text ||p.title.toLowerCase() == req.params.text || p.title == req.params.text)
     if(results.length > 0) //checks if the title is found, if not it returns a message
     {
         resp.json(results)
@@ -159,7 +159,7 @@ app.get("/api/painting/title/:text", (req,resp) =>
 // This returns the JSON containing the paintings that have a color matched with the provided value
 app.get("/api/painting/color/:name", (req,resp) =>
 {
-    const results = paintings.filter(p => p.details.annotation.dominantColors.some(p => p.name.toUpperCase() == req.params.name ||p.name.toLowerCase() == req.params.name))
+    const results = paintings.filter(p => p.details.annotation.dominantColors.some(p => p.name.toUpperCase() == req.params.name ||p.name.toLowerCase() == req.params.name ||p.name == req.params.name))
     if(results.length > 0) //checks if the color name is found, if not it returns a message
     {
         resp.json(results)
@@ -174,7 +174,7 @@ app.get("/api/painting/color/:name", (req,resp) =>
 // This returns the JSON containing the artists from the country provided
 app.get("/api/artists/:country", (req,resp) =>
 {
-    const results = artists.filter(p => p.Nationality.toLowerCase() == req.params.country ||p.Nationality.toUpperCase() == req.params.country )
+    const results = artists.filter(p => p.Nationality.toLowerCase() == req.params.country ||p.Nationality.toUpperCase() == req.params.country ||p.Nationality == req.params.country  )
     if(results.length > 0) //checks if the artist from this country is found, if not it returns a message
     {
         resp.json(results)
@@ -189,7 +189,7 @@ app.get("/api/artists/:country", (req,resp) =>
 // this returns the JSON containing the galleries from the country provided
 app.get("/api/galleries/:country", (req,resp) => 
 {
-    const results = galleries.filter(p => p.GalleryCountry.toLowerCase() == req.params.country ||p.GalleryCountry.toUpperCase() == req.params.country)
+    const results = galleries.filter(p => p.GalleryCountry.toLowerCase() == req.params.country ||p.GalleryCountry.toUpperCase() == req.params.country || p.GalleryCountry == req.params.country)
     if(results.length > 0) //checks if a gallery from this country is found, if not it returns a message
     {
         resp.json(results)
