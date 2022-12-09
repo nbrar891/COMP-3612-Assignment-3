@@ -4,6 +4,7 @@
 link to glitch website:  https://mesquite-periwinkle-pint.glitch.me
 
 testing :
+
 https://mesquite-periwinkle-pint.glitch.me/api/paintings
 
 https://mesquite-periwinkle-pint.glitch.me/api/painting/433
